@@ -35,7 +35,7 @@ class TanzaniteDetailScreen extends StatelessWidget {
                 "assets/images/TanzaniteBg.jpg",
                 height: 200,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             SizedBox(height: 16),

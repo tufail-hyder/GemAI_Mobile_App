@@ -35,7 +35,7 @@ class DiamondDetailScreen extends StatelessWidget {
                 "assets/images/DiamondBg.jpg",
                 height: 200,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             SizedBox(height: 16),

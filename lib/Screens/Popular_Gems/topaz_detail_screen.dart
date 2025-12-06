@@ -35,7 +35,7 @@ class TopazDetailScreen extends StatelessWidget {
                 "assets/images/TopazBg.jpg",
                 height: 200,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
             SizedBox(height: 16),

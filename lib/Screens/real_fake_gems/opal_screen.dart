@@ -6,23 +6,276 @@ class OpalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 230, 227, 227),
       appBar: AppBar(
-        title: const Text("Opal"),
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: const Color.fromARGB(255, 230, 227, 227),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, size: 22),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset("assets/images/Opal.png", height: 200),
-            const SizedBox(height: 20),
-            const Text(
-              "Real Opals show flashes of color that change with angle. "
-              "Fake Opals have uniform patterns and no play of color.",
-              style: TextStyle(fontSize: 16),
+            // RichText title
+            RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'TimesRomanFont',
+                  color: Colors.black,
+                ),
+                children: [
+                  TextSpan(text: "Real \t"),
+                  TextSpan(
+                    text: "V",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 235, 145, 11),
+                      fontSize: 24,
+                    ),
+                  ),
+                  TextSpan(
+                    text: "S",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 219, 37, 24),
+                      fontSize: 24,
+                    ),
+                  ),
+                  TextSpan(text: "\t Fake"),
+                ],
+              ),
             ),
+            const SizedBox(height: 6),
+
+            const Text(
+              "Opal",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'TimesRomanFont',
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            // Stone Image
+            Center(
+              child: Container(
+                height: 140,
+                width: 120,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: const DecorationImage(
+                    image: AssetImage("assets/images/RealvsFake/Opal.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 5),
+
+            // Top description
+            const Text(
+              "Opal is a hydrated amorphous form of silica, known for its captivating play-of-color. "
+              "It has been used in jewelry for centuries and comes in a variety of colors and patterns. "
+              "The main differences between real and fake Opal are illustrated below:",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+                fontFamily: 'TimesRomanFont',
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Sections
+            sectionTitle("Overview"),
+            const SizedBox(height: 5),
+            realFakeRow(
+              realText:
+                  "Real opal shows a beautiful play-of-color when viewed from different angles and is slightly heavy due to water content.",
+              fakeText:
+                  "Fake opal often lacks vibrant color play, may appear too uniform, or is made from plastic or glass.",
+              realImage: "assets/images/RealvsFake/opal_real.png",
+              fakeImage: "assets/images/RealvsFake/opal_fake.png",
+              containerHeight: 70,
+              containerWidth: 100,
+            ),
+            const SizedBox(height: 5),
+
+            sectionTitle("Color"),
+            const SizedBox(height: 5),
+            realFakeRow(
+              realText:
+                  "Natural opals display multicolored flashes within a single stone, unique to each gem.",
+              fakeText:
+                  "Fakes may have painted or printed colors which look flat or repetitive.",
+            ),
+            const SizedBox(height: 5),
+
+            sectionTitle("Hardness & Feel"),
+            const SizedBox(height: 5),
+            realFakeRow(
+              realText:
+                  "Real opal has a Mohs hardness of 5.5–6.5 and feels slightly cool to the touch.",
+              fakeText:
+                  "Plastic fakes feel warmer and lighter, while glass fakes feel unnaturally heavy.",
+            ),
+            const SizedBox(height: 5),
+
+            sectionTitle("Specific Gravity"),
+            const SizedBox(height: 5),
+            realFakeRow(
+              realText:
+                  "Real opals have a specific gravity around 2.1–2.2, which makes them heavier than most plastic imitations.",
+              fakeText:
+                  "Fake opals made from plastic are very light; glass fakes may feel too heavy or unnatural.",
+            ),
+            const SizedBox(height: 5),
+
+            sectionTitle("Inclusions"),
+            const SizedBox(height: 5),
+            realFakeRow(
+              realText:
+                  "Real opals may contain natural inclusions, tiny cracks, or unique patterns that give each stone character.",
+              fakeText:
+                  "Fakes may show bubbles, overly smooth surfaces, or repetitive patterns.",
+            ),
+
+            const SizedBox(height: 20),
           ],
         ),
+      ),
+    );
+  }
+
+  // Section title
+  Widget sectionTitle(String text) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'TimesRomanFont',
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Real vs Fake row
+  Widget realFakeRow({
+    required String realText,
+    required String fakeText,
+    String? realImage,
+    String? fakeImage,
+    double containerHeight = 100,
+    double containerWidth = double.infinity,
+  }) {
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.only(right: 2, bottom: 11),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 248, 230, 204),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Real",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 247, 164, 41),
+                      fontSize: 18,
+                      fontFamily: 'TimesRomanFont',
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    realText,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
+                      fontFamily: 'TimesRomanFont',
+                    ),
+                  ),
+                  if (realImage != null) ...[
+                    const SizedBox(height: 8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        realImage,
+                        height: containerHeight,
+                        width: containerWidth,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              margin: const EdgeInsets.only(left: 2, bottom: 12),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 248, 214, 217),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Fake",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                      fontSize: 18,
+                      fontFamily: 'TimesRomanFont',
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    fakeText,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.black87,
+                      fontFamily: 'TimesRomanFont',
+                    ),
+                  ),
+                  if (fakeImage != null) ...[
+                    const SizedBox(height: 8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        fakeImage,
+                        height: containerHeight,
+                        width: containerWidth,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
